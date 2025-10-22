@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # local
     'apps.core',
     'apps.catalog',
+    'apps.storage',
     'apps.inventory',
 ]
 
