@@ -37,7 +37,14 @@ class BatchImportAdminView(FormView):
         storage = form.cleaned_data["storage"]
         file = form.cleaned_data["file"]
 
-        res = import_batch_from_csv(file=file, batch_number=batch_number, storage=storage)
+        try:
+            res = import_batch_from_csv(file=file, batch_number=batch_number, storage=storage)
+        except ValueError as e:
+            messages.error(self.request, str(e))
+            return redirect(reverse("admin:inventory_batch_import"))
+        except Exception:
+            messages.error(self.request, "Неожиданная ошибка импорта. Попробуйте еще раз или обратитесь к администратору.")
+            return redirect(reverse("admin:inventory_batch_import"))
 
         msg = (
             f"Импорт '{res.file_name}' в партию '{batch_number}' завершён: "
