@@ -61,9 +61,6 @@ class ImportLog(TimeStampedModel):
             models.Index(fields=["file_sha256"]),
         ]
         constraints = [
-            models.UniqueConstraint(
-                fields=["batch", "file_sha256"], name="uq_importlog_batch_sha256"
-            ),
             models.CheckConstraint(
                 check=Q(duration_sec__gte=0), name="ck_importlog_duration_nonneg"
             ),
