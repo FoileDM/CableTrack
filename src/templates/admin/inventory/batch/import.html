@@ -1,0 +1,32 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="content">
+    <h1>Импорт CSV в партию</h1>
+    <form method="post" enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+      <fieldset class="module aligned">
+        <div class="form-row">
+          {{ form.batch_number.errors }}
+          <label for="{{ form.batch_number.id_for_label }}">Номер партии:</label>
+          {{ form.batch_number }}
+        </div>
+        <div class="form-row">
+          {{ form.storage.errors }}
+          <label for="{{ form.storage.id_for_label }}">Склад:</label>
+          {{ form.storage }}
+        </div>
+        <div class="form-row">
+          {{ form.file.errors }}
+          <label for="{{ form.file.id_for_label }}">CSV-файл:</label>
+          {{ form.file }}
+        </div>
+      </fieldset>
+      <div class="submit-row">
+        <input type="submit" value="Импортировать" class="default">
+        <a href="{% url 'admin:inventory_batch_changelist' %}" class="button cancel-link">Отмена</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}
