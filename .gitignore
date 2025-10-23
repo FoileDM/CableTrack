@@ -185,3 +185,8 @@ fabric.properties
 .idea
 /.env.old
 /src/staticfiles/
+/data/batch_dup_positions.csv
+/data/batch_invalid_lengths.csv
+/data/batch_missing_positions.csv
+/data/batch_mixed.csv
+/data/batch_valid.csv
